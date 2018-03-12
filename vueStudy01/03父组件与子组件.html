@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+        <parent-component></parent-component>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.14/dist/vue.js"></script>
+<script>
+
+//父子组件的全局注册
+    // var sonComponent = Vue.extend({
+    //     template: "<div>hello world , i am your son</div>"
+    // })
+    // var parentComponent = Vue.extend({
+    //     template:"<div>hello world , i am your parent <child-component></child-component> </div>",
+    //     components:{
+    //         'child-component':sonComponent
+    //     }
+    // })
+ 
+    // Vue.component('parent-component', parentComponent)
+
+    // new Vue({
+    //     el: '#container',
+    // })
+
+//父子组件的局部注册
+        
+    new Vue({
+        el: '#container',
+        components:{
+            'parent-component':{
+                template:"<div>hello world parent<child-component></child-component></div>",
+                components:{
+                    'child-component':{
+                        template:'<div>hello world son</div>'
+                    }
+                }
+            }
+        }
+    })
+</script>
+</html>

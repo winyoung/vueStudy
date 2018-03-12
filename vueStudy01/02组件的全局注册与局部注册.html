@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container">
+        <my-component></my-component>
+    </div>
+    <div id="container1">
+        <!-- 由于此组件是局部注册的，所以container1中是拿不到的 -->
+        <my-component></my-component>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.14/dist/vue.js"></script>
+<script>
+    //创建组件构造器
+    var myComponent = Vue.extend({
+        template: '<div>hello world</div>'
+    })
+
+    //全局注册组件
+    // Vue.component('my-component', myComponent)
+
+    //组建实例化
+    new Vue({
+        el: '#container',
+        data: {},
+        components:{
+            //局部注册组件
+            'my-component':myComponent
+        }
+    })
+
+    new Vue({
+        el: '#container1',
+    })
+</script>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container">
+        <parent-component></parent-component>
+    </div>
+
+    <!-- 使用script标签需要指定type类型 -->
+    <!-- <script type="text/x-template" id="parent">
+        <div>hello world parent<child-component></child-component></div>
+    </script>
+    <script type="text/x-template" id="son">
+            <div>hello world son</div>
+    </script> -->
+
+    <!-- 使用template标签，不需要指定type类型 -->
+    <template id="parent">
+            <div>hello world parent<child-component></child-component></div>
+    </template>
+
+    <template id="son">
+        <div>hello world son</div>
+    </template>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.14/dist/vue.js"></script>
+<script>
+
+    new Vue({
+        el: '#container',
+        components: {
+            'parent-component': {
+                template: "#parent",
+                components: {
+                    'child-component': {
+                        template: '#son'
+                    }
+                }
+            }
+        }
+    })
+</script>
+
+</html>
