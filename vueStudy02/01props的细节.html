@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 注意： HTML特性是不区分大小写的，所以当使用的不是字符串模板，camelCased(驼峰式) 命名的prop需要转换为相对应的 kebab-case(短横线隔开式)命名 -->
+    <div id="container1">
+        <!-- kebab-case in HTML-->
+        <child my-message="hello!"></child>
+    </div>
+
+    <!-- 在模板中，要动态地绑定父组件的数据到子模板的props，使用v-bind，每当父组件的数据变化时，该变化会传递给子组件。 -->
+    <div id="container2">
+        <input v-model="parentMsg" />
+        <br />
+        <!-- kebab-case in HTML-->
+        <child v-bind:my-message="parentMsg"></child>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.14/dist/vue.js"></script>
+<script type="text/javascript">
+    // 全局注册
+    Vue.component('child', {
+        // 声明props 
+        props: ['myMessage'],
+        template: '<span>{{ myMessage }}</span>'
+    });
+    new Vue({
+        el: '#container1'
+    })
+
+    new Vue({
+            el: '#container2',
+            data: {
+                parentMsg: 'Message'
+            },
+            components: {
+                child: {
+                    props: ['myMessage'],
+                    template: '<span>{{myMessage}}</span>'
+                }
+            }
+        })
+</script>
+</html>

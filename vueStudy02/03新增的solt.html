@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <slot>标签中的任何内容都被视为 备用内容。备用内容在子组件的作用域内编译，并且只有在宿主元素为空，且没有插入的内容时才显示备用内容。 如果
+        <slot>标签中有内容的话，就显示该内容。 -->
+    <div id="container">
+        <my-component>
+            <h1>这个h1若存在，则slot中的备用内容不显示，并且显示这段文字</h1><!-- 这个h1若不存在，则显示slot中的备用内容 -->
+        </my-component>
+    </div>
+    <template id="myComponent">
+        <div>
+            <h2>this is a component</h2>
+            <slot>这里是备用内容</slot>
+        </div>
+    </template>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.14/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#container',
+        components:{
+            'my-component':{
+                template:"#myComponent",
+            }
+        }
+    })
+</script>
+</html>

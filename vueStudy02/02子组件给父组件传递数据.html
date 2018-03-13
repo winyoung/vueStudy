@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 注意： on和on和emit 不是 addEventListener 和 dispatchEvent的别名。且 父组件可以在使用组件的地方直接用 v-on 来监听子组件触发的事件。 不能用$on侦听子组件抛出的事件，而必须在模板里直接用v-on绑定 -->
+    <div id="container1">
+        <p> {{ total }} </p>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+        <button-counter v-on:increment="incrementTotal"></button-counter>
+    </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.14/dist/vue.js"></script>
+<script>
+    Vue.component('button-counter', {
+        template:'<button @click="increment"></button>',
+        data(){
+            return {
+                counter: 0
+            }
+        },
+        methods:{
+            increment(){
+                this.counter++;
+                this.$emit('increment');//触发子组件上绑定的父组件的increment事件
+            }
+        }
+    })
+    new Vue({
+        el: '#container1',
+        data:{
+            total: 0
+        },
+        methods:{
+            incrementTotal(){
+                this.total++
+            }
+        }
+    })
+</script>
+</html>
